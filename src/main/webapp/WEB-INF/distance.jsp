@@ -5,8 +5,23 @@
 
 </head>
 <body>
-    <h1>
-        Hello
-        <c:out value="${ result }" />
-    </h1>
+    <form>
+    	<label>Ville 1: </label>
+    	<select>
+    		<c:forEach var="ville" items="${result}" >
+                <option value="${ ville.getNomCommune() }">
+                    ${ville.getNomCommune()}
+                </option>
+            </c:forEach>
+    	</select>
+    	<label>Ville 2: </label>
+    	<select>
+    		<c:forEach var="ville" items="${result}" >
+                <option value="${ ville.getNomCommune() }">
+                    ${ville.getNomCommune()}
+                </option>
+            </c:forEach>
+    	</select>
+    	<input type="submit" value="compute"/>
+    </form>
 </html>
