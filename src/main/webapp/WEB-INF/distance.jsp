@@ -9,7 +9,7 @@
     	<label>Ville 1: </label>
     	<select name="city1">
     		<c:forEach var="ville" items="${result}" >
-                <option value="${ ville.getNomCommune() }">
+                <option value="${ ville.getCodeCommune() }">
                     ${ville.getNomCommune()}
                 </option>
             </c:forEach>
@@ -17,7 +17,7 @@
     	<label>Ville 2: </label>
     	<select name="city2">
     		<c:forEach var="ville" items="${result}" >
-                <option value="${ ville.getNomCommune() }">
+                <option value="${ ville.getCodeCommune() }">
                     ${ville.getNomCommune()}
                 </option>
             </c:forEach>

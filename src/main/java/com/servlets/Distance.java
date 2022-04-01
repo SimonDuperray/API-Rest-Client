@@ -67,6 +67,7 @@ public class Distance extends HttpServlet {
     		} else {
     			request.setAttribute("city1", city1);
     			request.setAttribute("city2", city2);
+    			// get cities coordinates
     			request.setAttribute("distance", 10);
     			this.getServletContext().getRequestDispatcher("/WEB-INF/distance_result.jsp").forward(request, response);
     		}
