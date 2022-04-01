@@ -19,6 +19,8 @@ public class Ville {
 			this.latitude=latitude;
 			this.longitude=longitude;
 		}
+		
+		public Ville() {}
 
 		public String getCodeCommune() {
 			return codeCommune;

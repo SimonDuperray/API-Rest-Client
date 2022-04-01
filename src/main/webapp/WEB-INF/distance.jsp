@@ -25,6 +25,6 @@
     	<input type="submit" value="compute"/>
     </form>
     <c:if test="${ distance>0 }">
-		<h1>Distance: <c:out value="${ distance }"/></h1>
+		<p>There are <c:out value="${ distance }"/> km between <c:out value="${ city1 }"/> and <c:out value="${ city2 }"/></p>
 	</c:if>
 </html>
