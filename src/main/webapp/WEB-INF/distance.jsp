@@ -5,9 +5,9 @@
 
 </head>
 <body>
-    <form>
+    <form method="post" action="distance">
     	<label>Ville 1: </label>
-    	<select>
+    	<select name="city1">
     		<c:forEach var="ville" items="${result}" >
                 <option value="${ ville.getNomCommune() }">
                     ${ville.getNomCommune()}
@@ -15,7 +15,7 @@
             </c:forEach>
     	</select>
     	<label>Ville 2: </label>
-    	<select>
+    	<select name="city2">
     		<c:forEach var="ville" items="${result}" >
                 <option value="${ ville.getNomCommune() }">
                     ${ville.getNomCommune()}
@@ -24,4 +24,7 @@
     	</select>
     	<input type="submit" value="compute"/>
     </form>
+    <c:if test="${ distance>0 }">
+		<h1>Distance: <c:out value="${ distance }"/></h1>
+	</c:if>
 </html>

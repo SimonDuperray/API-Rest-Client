@@ -49,7 +49,6 @@ public class Distance extends HttpServlet {
 			    Gson gson = new Gson();
 			    List<Ville> villes = new ArrayList<Ville>();
 			    villes = gson.fromJson (responseBody, new TypeToken<List<Ville>>() {}.getType());
-
 			    
 			    request.setAttribute("result", villes);
 		    }
@@ -59,6 +58,21 @@ public class Distance extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/WEB-INF/distance.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	if(request.getParameter("city1")!=null && request.getParameter("city2")!=null) {
+    		String city1 = request.getParameter("city1");
+    		String city2 = request.getParameter("city2");
+    		
+    		if(city1.equals(city2)) {
+    			System.out.println("Cities cannot be equals");
+    		} else {
+    			request.setAttribute("city1", city1);
+    			request.setAttribute("city2", city2);
+    			request.setAttribute("distance", 10);
+    			this.getServletContext().getRequestDispatcher("/WEB-INF/distance_result.jsp").forward(request, response);
+    		}
+    	}
 
+		
+		
     }
 }
