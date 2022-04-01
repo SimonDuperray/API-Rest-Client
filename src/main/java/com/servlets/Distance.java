@@ -76,7 +76,7 @@ public class Distance extends HttpServlet {
     		
     		// GET FIRST CITY COORDINATES
     		String url_city1 = "http://localhost:8080/ville?codeCommune="+codeCommune1;
-    		System.out.println("====="+url_city1);
+    		System.out.println("\n========\n"+url_city1);
     		URL url1 = new URL(url_city1);
     		HttpURLConnection conn1 = (HttpURLConnection) url1.openConnection();
     		conn1.setRequestMethod("GET");
