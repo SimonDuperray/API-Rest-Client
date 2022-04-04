@@ -3,27 +3,19 @@ package com.servlets;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.json.JSONParser;
 
 import com.beans.Ville;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 
@@ -34,8 +26,7 @@ public class Distance extends HttpServlet {
         super();
     }
     
-    
-    private double distance(double lat1, double lon1, double lat2, double lon2, double el1, double el2) {    	
+    private double distance(double lat1, double lon1, double lat2, double lon2) {
     	double dist =  (6378.137)*Math.acos(Math.sin(Math.toRadians(lat1))*Math.sin(Math.toRadians(lat2))+Math.cos(Math.toRadians(lat1))*Math.cos(Math.toRadians(lat2))*Math.cos(Math.toRadians(lon2-lon1)));
     	return (double) Math.round(dist*10d)/10d;
     }
@@ -123,7 +114,7 @@ public class Distance extends HttpServlet {
     		}
     		
     		System.out.println("("+lat1+";"+lon1+") -- ("+lat2+";"+lon2+")");
-    		double distance = distance(lat1, lon1, lat2, lon2, 0.0, 0.0);
+    		double distance = distance(lat1, lon1, lat2, lon2);
     		//double distance = distance(32.9697, -96.80322, 29.46786, -98.53506, 0.0, 0.0);
     		
     		
