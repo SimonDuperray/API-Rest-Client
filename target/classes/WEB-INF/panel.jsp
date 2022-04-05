@@ -9,6 +9,7 @@
 <body>
     <%@ include file="navbar.jsp" %>
     <div class="container">
-	    <h1>CRUD View</h1>
+	    <h1>Panel view</h1>
+	    <a href="/API-Client/distance" class="btn btn-primary">Back to Home</a>
     </div>
 </html>

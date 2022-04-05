@@ -32,7 +32,7 @@
 	        </div>
 	        <input class="btn btn-primary" type="submit" value="compute"/>
 	    </form>
-	    <a href="/API-Client/panel" class="btn btn-primary">CRUD</a>
+	    <a target="_blank" href="/API-Client/panel" class="btn btn-primary">CRUD</a>
 	    <c:if test="${ distance>0 }">
 	        <p>There are around <c:out value="${ distance }"/> km between <c:out value="${ city1 }"/> and <c:out value="${ city2 }"/></p>
 	    </c:if>
