@@ -31,6 +31,27 @@ public class Distance extends HttpServlet {
     	return (double) Math.round(dist*10d)/10d;
     }
     
+    private void deleteCity(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	System.out.println("DeleteCity triggered");
+    	String id = request.getParameter("id");
+    	System.out.println(id);
+    	String url_str = "http://localhost:8080/ville?codeCommune="+id;
+    	System.out.println("url generated: "+url_str);
+    	URL url = new URL(url_str);
+    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    	conn.setRequestMethod("DELETE");
+    	conn.setRequestProperty("Accept", "application/json");
+    	System.out.println(conn);
+    	conn.connect();
+    	System.out.println("response code: "+conn.getResponseCode());
+    	if(conn.getResponseCode()!=200) {
+    		request.setAttribute("delete_success", false);
+    		throw new RuntimeException("Failed: HTTP eror code: "+conn.getResponseCode());
+    	} else {
+    		request.setAttribute("delete_success", true);
+    	}
+    }
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url_simple = "http://localhost:8080/ville";
         URL url = new URL(url_simple);
@@ -52,6 +73,21 @@ public class Distance extends HttpServlet {
 			    
 			    request.setAttribute("result", villes);
 		    }
+			
+		}
+		
+		String action = request.getServletPath();
+		System.out.print("action: ");
+		System.out.println(action);
+		try {
+			switch(action) {
+			case "/panel/delete":
+				deleteCity(request, response);
+				break;
+			default:
+				break;
+			}
+		} catch(IOException e) {
 			
 		}
 
