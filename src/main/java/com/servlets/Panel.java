@@ -25,21 +25,7 @@ public class Panel extends HttpServlet {
 
     public Panel() {
         super();
-    }
-    
-	/*
-	 * private void deleteCity(HttpServletRequest request, HttpServletResponse
-	 * response) throws IOException { int id =
-	 * Integer.parseInt(request.getParameter("id")); String url_str =
-	 * "http://localhost:8080/ville?codeCommune="+id; URL url = new URL(url_str);
-	 * HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	 * conn.setRequestMethod("DELETE"); conn.setRequestProperty("Accept",
-	 * "application/json"); InputStream res = conn.getInputStream();
-	 * if(conn.getResponseCode()!=200) { request.setAttribute("delete_success",
-	 * false); throw new
-	 * RuntimeException("Failed: HTTP eror code: "+conn.getResponseCode()); } else {
-	 * request.setAttribute("delete_success", true); } }
-	 */
+    }	 
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String url_simple = "http://localhost:8080/ville";
@@ -64,19 +50,41 @@ public class Panel extends HttpServlet {
 		    }
 			
 		}
-		
-		/*
-		 * String action = request.getServletPath(); System.out.print("action: ");
-		 * System.out.println(action); try { switch(action) { case "/delete":
-		 * deleteCity(request, response); break; default: break; } } catch(IOException
-		 * e) {
-		 * 
-		 * }
-		 */
-
+		 
         this.getServletContext().getRequestDispatcher("/WEB-INF/panel.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	this.getServletContext().getRequestDispatcher("/WEB-INF/panel.jsp").forward(request, response);
+    	String codeCommune = request.getParameter("codeCommune");
+    	String nomCommune = request.getParameter("nomCommune");
+    	String codePostal = request.getParameter("codePostal");
+    	String libelleAcheminement = request.getParameter("libelleAcheminement");
+    	String latitude = request.getParameter("latitude");
+    	String longitude = request.getParameter("longitude");
+    	String ligne = request.getParameter("ligne");
+    	
+    	System.out.println(codeCommune);
+    	System.out.println(nomCommune);
+    	System.out.println(codePostal);
+    	System.out.println(libelleAcheminement);
+    	System.out.println(ligne);
+    	System.out.println(latitude);
+    	System.out.println(longitude);
+    	
+    	Ville ville = new Ville(codeCommune, nomCommune, codePostal, libelleAcheminement, ligne, latitude, longitude);
+    	
+    	String url_str = "http://localhost:8080/ville?codeCommune="+codeCommune+"&nomCommune="+nomCommune+"&codePostal="+codePostal+"&libelleAcheminement="+libelleAcheminement+"&ligne="+ligne+"&latitude="+latitude+"&longitude="+longitude;
+    	URL url = new URL(url_str);
+    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    	conn.setRequestMethod("POST");
+    	conn.setRequestProperty("Accept", "application/json");
+    	conn.connect();
+    	InputStream res = conn.getInputStream();
+    	if(conn.getResponseCode()!=200) {
+    		throw new RuntimeException("Failed : HTTP error code : "
+					+ conn.getResponseCode());
+    	} else {
+    		System.out.println("City added");
+    		}
+    	}
+    	
     }
-}

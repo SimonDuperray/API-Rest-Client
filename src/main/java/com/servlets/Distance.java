@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,29 +32,8 @@ public class Distance extends HttpServlet {
     	return (double) Math.round(dist*10d)/10d;
     }
     
-    private void deleteCity(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	System.out.println("DeleteCity triggered");
-    	String id = request.getParameter("id");
-    	System.out.println(id);
-    	String url_str = "http://localhost:8080/ville?codeCommune="+id;
-    	System.out.println("url generated: "+url_str);
-    	URL url = new URL(url_str);
-    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-    	conn.setRequestMethod("DELETE");
-    	conn.setRequestProperty("Accept", "application/json");
-    	System.out.println(conn);
-    	conn.connect();
-    	System.out.println("response code: "+conn.getResponseCode());
-    	if(conn.getResponseCode()!=200) {
-    		request.setAttribute("delete_success", false);
-    		throw new RuntimeException("Failed: HTTP eror code: "+conn.getResponseCode());
-    	} else {
-    		request.setAttribute("delete_success", true);
-    	}
-    }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String url_simple = "http://localhost:8080/ville";
+    private void listCities(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    	String url_simple = "http://localhost:8080/ville";
         URL url = new URL(url_simple);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
@@ -72,26 +52,86 @@ public class Distance extends HttpServlet {
 			    villes = gson.fromJson (responseBody, new TypeToken<List<Ville>>() {}.getType());
 			    
 			    request.setAttribute("result", villes);
+			    this.getServletContext().getRequestDispatcher("/WEB-INF/distance.jsp").forward(request, response);
 		    }
 			
 		}
-		
-		String action = request.getServletPath();
-		System.out.print("action: ");
-		System.out.println(action);
-		try {
-			switch(action) {
-			case "/panel/delete":
-				deleteCity(request, response);
-				break;
-			default:
-				break;
+    }
+    
+	  private void deleteCity(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException { 
+		  System.out.println("DeleteCity triggered");
+		  String id = request.getParameter("id"); 
+		  System.out.println(id); 
+		  String url_str = "http://localhost:8080/ville?codeCommune="+id;
+		  System.out.println("url generated: "+url_str); 
+		  URL url = new URL(url_str);
+		  HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		  conn.setRequestMethod("DELETE"); 
+		  conn.setRequestProperty("Accept", "application/json"); 
+		  System.out.println(conn); 
+		  conn.connect();
+		  System.out.println("response code: "+conn.getResponseCode());
+		  if(conn.getResponseCode()!=200) { 
+			  request.setAttribute("delete_success", false); 
+			  throw new RuntimeException("Failed: HTTP eror code: "+conn.getResponseCode()); 
+		  } else {
+			  request.setAttribute("delete_success", true); 
+		  } 
+		  this.getServletContext().getRequestDispatcher("/WEB-INF/panel.jsp").forward(request, response);
+	  }
+	 
+	  private void editCity(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		  System.out.println("editCity triggered");
+		  String id = request.getParameter("id");  
+		  System.out.println(id); 
+		  String url_str = "http://localhost:8080/ville?codeCommune="+id;
+		  System.out.println("url generated: "+url_str); 
+	      URL url = new URL(url_str);
+	      HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	      conn.setRequestMethod("GET");
+	      conn.setRequestProperty("Accept", "application/json");
+	      InputStream res = conn.getInputStream();
+	      System.out.println("response code: "+conn.getResponseCode());
+	      Ville ville = new Ville();
+	      if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ conn.getResponseCode());
+			} else {
+				try (Scanner scanner = new Scanner(res)) {
+				    String responseBody = scanner.useDelimiter("\\A").next();
+				    // convert string to array of Ville
+				    Gson gson = new Gson();
+				    ville = gson.fromJson(responseBody, Ville.class);
+				    System.out.println(ville.getNomCommune());
+			    }
 			}
-		} catch(IOException e) {
-			
-		}
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/distance.jsp").forward(request, response);
+//	      RequestDispatcher dispatcher = request.getRequestDispatcher("edit.jsp");
+	      request.setAttribute("getVille", ville);
+//	      dispatcher.forward(request, response);
+	      this.getServletContext().getRequestDispatcher("/WEB-INF/distance.jsp").forward(request, response);
+	  }
+	  
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+		
+		 String action = request.getServletPath(); 
+		 System.out.println("action: "+action);
+		 try { 
+			 switch(action) { 
+			 	case "/":
+			 		listCities(request, response);
+			 		break;
+			 	case "/panel/delete":
+		 			deleteCity(request, response); 
+		 			break; 
+			 	case "/panel/edit":
+			 		editCity(request, response);
+			 		break;
+	 			default: break; 
+ 			 } 
+		 } catch(IOException e) {
+		  
+		 }
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	if(request.getParameter("city1")!=null && request.getParameter("city2")!=null) {

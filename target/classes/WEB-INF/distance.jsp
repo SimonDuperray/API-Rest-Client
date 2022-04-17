@@ -5,6 +5,7 @@
 	<style>
 		form { margin-bottom: 20px; }
 	</style>
+	<title>Distance</title>
 </head>
 <body>
     <%@ include file="navbar.jsp" %>
