@@ -68,7 +68,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/list?page=${page}" method="post">
+                                    <form action="/API-Client/list?page=${page}" method="post">
                                         <input type="hidden" name="_method" value="post">
                                         <div class="form-group row">
                                             <label for="codeCommune"
@@ -184,7 +184,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="/list?page=${page}" method="post">
+                                        <form action="/API-Client/list?page=${page}" method="post">
                                             <input type="hidden" name="_method" value="put">
                                             <div class="form-group row">
                                                 <label for="codeCommune-${ville.getCodeCommune()}"
@@ -287,15 +287,15 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        Êtes-vous sûr de vouloir supprimer ${ville.getNomCommune()} ?
+                                        ï¿½tes-vous sï¿½r de vouloir supprimer ${ville.getNomCommune()} ?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
                                         </button>
-                                        <form action="/list?page=${page}" method="post">
+                                        <form action="/API-Client/list?page=${page}" method="post">
                                             <input type="hidden" name="_method" value="delete">
                                             <input type="hidden" name="codeCommune" value="${ville.getCodeCommune()}">
-                                            <button href="/list?page=${page}" type="submit" class="btn btn-danger">
+                                            <button href="/API-Client/list?page=${page}" type="submit" class="btn btn-danger">
                                                 Delete
                                             </button>
                                         </form>
@@ -328,16 +328,16 @@
                 </c:if>
                 <c:if test="${page==2}">
                     <li class="page-item">
-                        <a class="page-link" href="/list?page=${page-1}">Previous</a>
+                        <a class="page-link" href="/API-Client/list?page=${page-1}">Previous</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="/list?page=${page-1}">${page-1}</a></li>
+                    <li class="page-item"><a class="page-link" href="/API-Client/list?page=${page-1}">${page-1}</a></li>
                 </c:if>
                 <c:if test="${page>2}">
                     <li class="page-item">
-                        <a class="page-link" href="/list?page=${page-1}">Previous</a>
+                        <a class="page-link" href="/API-Client/list?page=${page-1}">Previous</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="/list?page=${page-2}">${page-2}</a></li>
-                    <li class="page-item"><a class="page-link" href="/list?page=${page-1}">${page-1}</a></li>
+                    <li class="page-item"><a class="page-link" href="/API-Client/list?page=${page-2}">${page-2}</a></li>
+                    <li class="page-item"><a class="page-link" href="/API-Client/list?page=${page-1}">${page-1}</a></li>
                 </c:if>
                 <li class="page-item active">
                   <span class="page-link">
@@ -351,16 +351,16 @@
                     </li>
                 </c:if>
                 <c:if test="${page==nbPages-1}">
-                    <li class="page-item"><a class="page-link" href="/list?page=${page+1}">${page+1}</a></li>
+                    <li class="page-item"><a class="page-link" href="/API-Client/list?page=${page+1}">${page+1}</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="/list?page=${page+1}">Next</a>
+                        <a class="page-link" href="/API-Client/list?page=${page+1}">Next</a>
                     </li>
                 </c:if>
                 <c:if test="${page<nbPages-1}">
-                    <li class="page-item"><a class="page-link" href="/list?page=${page+1}">${page+1}</a></li>
-                    <li class="page-item"><a class="page-link" href="/list?page=${page+2}">${page+2}</a></li>
+                    <li class="page-item"><a class="page-link" href="/API-Client/list?page=${page+1}">${page+1}</a></li>
+                    <li class="page-item"><a class="page-link" href="/API-Client/list?page=${page+2}">${page+2}</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="/list?page=${page+1}">Next</a>
+                        <a class="page-link" href="/API-Client/list?page=${page+1}">Next</a>
                     </li>
                 </c:if>
             </ul>

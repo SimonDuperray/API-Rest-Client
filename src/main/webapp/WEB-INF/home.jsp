@@ -121,7 +121,7 @@
 </c:if>
 <div class="row justify-content-around" style="margin: 20px 0;">
     <div class="col-auto"></div><div class="col-auto">
-        <a class="btn btn-primary" href="/list" role="button">List</a></div>
+        <a class="btn btn-primary" href="API-Client/list" role="button">List</a></div>
 </div>
 </body>
 </html>

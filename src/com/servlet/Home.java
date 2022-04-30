@@ -35,7 +35,7 @@ public class Home extends HttpServlet {
 			villes = Process.getVilles();
 			session.setAttribute("villes", villes);
 		}
-		Ville ville1 = Process.getVille(request.getParameter("ville1"));
+		/*Ville ville1 = Process.getVille(request.getParameter("ville1"));
 		Ville ville2 = Process.getVille(request.getParameter("ville2"));
 		int distanceDirect = Process.getDistanceDirect(ville1, ville2);
 		int distanceRoad = Process.getDistanceRoad(ville1, ville2);
@@ -49,7 +49,7 @@ public class Home extends HttpServlet {
 		request.setAttribute("distanceDirect", distanceDirect);
 		request.setAttribute("distanceRoad", distanceRoad);
 		request.setAttribute("weatherVille1", weatherVille1);
-		request.setAttribute("weatherVille2", weatherVille2);
+		request.setAttribute("weatherVille2", weatherVille2);*/
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
 }
