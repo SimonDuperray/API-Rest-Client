@@ -14,6 +14,7 @@
     <title>Home</title>
 </head>
 <body>
+<%@ include file="navbar.html" %>
 <c:if test="${message != null and success}">
     <div class="row justify-content-center" style="margin-top: 20px;">
         <div class="col-md-6">

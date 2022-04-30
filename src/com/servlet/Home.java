@@ -39,7 +39,6 @@ public class Home extends HttpServlet {
 		Ville ville2 = Process.getVille(request.getParameter("ville2"));
 		int distanceDirect = Process.getDistanceDirect(ville1, ville2);
 		int distanceRoad = Process.getDistanceRoad(ville1, ville2);
-		HashMap<String, String> weatherVille1 = Process.getWeather(ville1);
 		HashMap<String, String> weatherVille2 = Process.getWeather(ville2);
 		
 		request.setAttribute("villes", villes);
@@ -48,7 +47,6 @@ public class Home extends HttpServlet {
 		request.setAttribute("ville2", ville2);
 		request.setAttribute("distanceDirect", distanceDirect);
 		request.setAttribute("distanceRoad", distanceRoad);
-		request.setAttribute("weatherVille1", weatherVille1);
 		request.setAttribute("weatherVille2", weatherVille2);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
