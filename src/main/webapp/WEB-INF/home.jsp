@@ -58,7 +58,7 @@
                         <c:out value="${ weatherVille1.get('main') }"/>
                     </p>
                     <small class="text-muted"> <c:out
-                            value="${ weatherVille1.get('temp') }"/> °C
+                            value="${ weatherVille1.get('temp') }"/> ï¿½C
                     </small>
                 </div>
             </div>
@@ -66,7 +66,7 @@
         <div class="col-3">
             <div class="card text-center">
                 <div class="card-header">
-                    <h5 class="card-title">Direct Distance</h5>
+                    <h5 class="card-title">Distance</h5>
                 </div>
                 <div>
                     <h5 class="card-title">
@@ -75,19 +75,6 @@
                              alt="Direct Distance Icon"
                              style="width: 5rem; margin: 0.5rem 1.5rem;">
                         <c:out value="${ distanceDirect/1000 }"/>
-                        km
-                    </h5>
-                </div>
-                <div class="card-header">
-                    <h5 class="card-title">Distance by Car</h5>
-                </div>
-                <div>
-                    <h5 class="card-title">
-                        <img class="card-img-top"
-                             src="https://thumbs.dreamstime.com/z/destination-distance-icon-passenger-transportation-destination-distance-icon-outline-logo-car-highway-geo-location-186218864.jpg"
-                             alt="Road Distance Icon"
-                             style="width: 9rem; height: 7.5rem; object-fit: cover;">
-                        <c:out value="${ distanceRoad/1000 }"/>
                         km
                     </h5>
                 </div>
@@ -112,7 +99,7 @@
                         <c:out value="${ weatherVille2.get('main') }"/>
                     </p>
                     <small class="text-muted"> <c:out
-                            value="${ weatherVille2.get('temp') }"/> °C
+                            value="${ weatherVille2.get('temp') }"/> ï¿½C
                     </small>
                 </div>
             </div>
@@ -121,7 +108,7 @@
 </c:if>
 <div class="row justify-content-around" style="margin: 20px 0;">
     <div class="col-auto"></div><div class="col-auto">
-        <a class="btn btn-primary" href="API-Client/list" role="button">List</a></div>
+        <a class="btn btn-primary" href="/API-Client/list" role="button">List</a></div>
 </div>
 </body>
 </html>

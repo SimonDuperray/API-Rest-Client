@@ -53,15 +53,15 @@ public class List extends HttpServlet {
             boolean success = false;
             switch (responseCode) {
                 case 200:
-                    message = "La ville a été créée avec succès.";
+                    message = "La ville a ete creee avec succes.";
                     success = true;
                     break;
                 case 409:
-                    message = "La ville existe déjà.";
+                    message = "La ville existe deja.";
                     break;
                 case -1:
                 case 500:
-                    message = "Quelque chose s'est mal passé.";
+                    message = "Quelque chose s'est mal passe.";
                     break;
             }
             request.setAttribute("message", message);
@@ -83,15 +83,15 @@ public class List extends HttpServlet {
         boolean success = false;
         switch (responseCode) {
             case 200:
-                message = "La ville a été modifiée avec succès.";
+                message = "La ville a ete modifiee avec succes.";
                 success = true;
                 break;
             case 404:
-                message = "La ville n'a pas été trouvée.";
+                message = "La ville n'a pas ï¿½tï¿½ trouvee.";
                 break;
             case -1:
             case 500:
-                message = "Quelque chose s'est mal passé.";
+                message = "Quelque chose s'est mal passe.";
                 break;
         }
         request.setAttribute("message", message);
@@ -106,15 +106,15 @@ public class List extends HttpServlet {
         boolean success = false;
         switch (responseCode) {
             case 200:
-                message = "La ville a été supprimée avec succès.";
+                message = "La ville a ete supprimee avec succes.";
                 success = true;
                 break;
             case 404:
-                message = "La ville n'a pas été trouvée.";
+                message = "La ville n'a pas ete trouvee.";
                 break;
             case -1:
             case 500:
-                message = "Quelque chose s'est mal passé.";
+                message = "Quelque chose s'est mal passe.";
                 break;
         }
         request.setAttribute("message", message);

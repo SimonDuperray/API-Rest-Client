@@ -17,13 +17,13 @@ public class URLBuilder {
 			return VILLES_API_BASE_URL;
 		}
 	}
-
-	public static String villesPaginated(int page) {
-		return VILLES_API_BASE_URL + "?size=50&page=" + page;
-	}
 	
 	public static String villes() {
 		return villes(null);
+	}
+
+	public static String villesPaginated(int page) {
+		return VILLES_API_BASE_URL + "?size=50&page=" + page;
 	}
 	
 	public static String ville(String codeCommune) {
