@@ -1,16 +1,15 @@
 package com.servlet;
 
-import java.io.IOException;
+import java.io.IOException ;
 import java.util.Map;
 
-import com.beans.Ville;
-import com.service.Process;
+import com.beans.City;
+import com.service.MainService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class List extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -27,8 +26,8 @@ public class List extends HttpServlet {
             page = 1;
         }
 
-        Map<String, Object> villePage = Process.getVillesPaginated(page);
-        request.setAttribute("villes", villePage.get("villes"));
+        Map<String, Object> villePage = MainService.getCitiesPaginated(page);
+        request.setAttribute("cities", villePage.get("villes"));
         request.setAttribute("page", page);
         request.setAttribute("nbPages", villePage.get("nbPages"));
         request.getRequestDispatcher("/WEB-INF/list.jsp").forward(request, response);
@@ -41,27 +40,27 @@ public class List extends HttpServlet {
         } else if (method.equals("delete")) {
             doDelete(request, response);
         } else {
-            Ville newVille = new Ville(request.getParameter("codeCommune"),
+        	City newCity = new City(request.getParameter("codeCommune"),
                     request.getParameter("nomCommune"),
                     request.getParameter("codePostal"),
                     request.getParameter("libelle"),
                     request.getParameter("ligne"),
                     request.getParameter("latitude"),
                     request.getParameter("longitude"));
-            int responseCode = Process.createVille(newVille);
+            int responseCode = MainService.createCity(newCity);
             String message = "";
             boolean success = false;
             switch (responseCode) {
                 case 200:
-                    message = "La ville a ete creee avec succes.";
+                    message = "La ville a été créée avec succès.";
                     success = true;
                     break;
                 case 409:
-                    message = "La ville existe deja.";
+                    message = "La ville existe déjà.";
                     break;
                 case -1:
                 case 500:
-                    message = "Quelque chose s'est mal passe.";
+                    message = "Quelque chose s'est mal passé.";
                     break;
             }
             request.setAttribute("message", message);
@@ -71,27 +70,27 @@ public class List extends HttpServlet {
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Ville updatedVille = new Ville(request.getParameter("codeCommune"),
+    	City updatedCity = new City(request.getParameter("codeCommune"),
                 request.getParameter("nomCommune"),
                 request.getParameter("codePostal"),
                 request.getParameter("libelle"),
                 request.getParameter("ligne"),
                 request.getParameter("latitude"),
                 request.getParameter("longitude"));
-        int responseCode = Process.updateVille(updatedVille);
+        int responseCode = MainService.updateCity(updatedCity);
         String message = "";
         boolean success = false;
         switch (responseCode) {
             case 200:
-                message = "La ville a ete modifiee avec succes.";
+                message = "La ville a été modifiée avec succès.";
                 success = true;
                 break;
             case 404:
-                message = "La ville n'a pas �t� trouvee.";
+                message = "La ville n'a pas été trouvée.";
                 break;
             case -1:
             case 500:
-                message = "Quelque chose s'est mal passe.";
+                message = "Quelque chose s'est mal passé.";
                 break;
         }
         request.setAttribute("message", message);
@@ -101,20 +100,20 @@ public class List extends HttpServlet {
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String codeCommune = request.getParameter("codeCommune");
-        int responseCode = Process.deleteVille(codeCommune);
+        int responseCode = MainService.deleteCity(codeCommune);
         String message = "";
         boolean success = false;
         switch (responseCode) {
             case 200:
-                message = "La ville a ete supprimee avec succes.";
+                message = "La ville a été supprimée avec succès.";
                 success = true;
                 break;
             case 404:
-                message = "La ville n'a pas ete trouvee.";
+                message = "La ville n'a pas été trouvée.";
                 break;
             case -1:
             case 500:
-                message = "Quelque chose s'est mal passe.";
+                message = "Quelque chose s'est mal passé.";
                 break;
         }
         request.setAttribute("message", message);

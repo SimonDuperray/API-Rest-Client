@@ -111,33 +111,33 @@
 	       </tr>
        </thead>
        <tbody>
-	       <c:forEach items="${villes}" var="ville">
+	       <c:forEach items="${cities}" var="city">
 	           <tr style="text-align:center;">
-	               <td>${ville.getCodeCommune()}</td>
-	               <td>${ville.getNomCommune()}</td>
-	               <td>${ville.getCodePostal()}</td>
-	               <td>${ville.getLibelleAcheminement()}</td>
-	               <td>${ville.getLatitude()}</td>
-	               <td>${ville.getLongitude()}</td>
+	               <td>${city.getCodeCommune()}</td>
+	               <td>${city.getNomCommune()}</td>
+	               <td>${city.getCodePostal()}</td>
+	               <td>${city.getLibelleAcheminement()}</td>
+	               <td>${city.getLatitude()}</td>
+	               <td>${city.getLongitude()}</td>
                		<td style="width: 18px;padding: .5rem .2rem">
 	                   <form action="/API-Client/list?page=${page}" method="post">
                            <input type="hidden" name="_method" value="delete">
-                           <input type="hidden" name="codeCommune" value="${ville.getCodeCommune()}">
+                           <input type="hidden" name="codeCommune" value="${city.getCodeCommune()}">
                            <button href="/API-Client/list?page=${page}" type="submit" class="btn btn-danger">
                                Delete
                            </button>
                           </form>
                		</td>
                		<td style="width: 18px;padding: .5rem .2rem">
-	                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal-${ville.getCodeCommune()}" style="margin: 0">
+	                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal-${city.getCodeCommune()}" style="margin: 0">
 	                       Edit
 	                   </button>
-	                   <div class="modal" id="updateModal-${ville.getCodeCommune()}" tabindex="-1" role="dialog" aria-hidden="true">
+	                   <div class="modal" id="updateModal-${city.getCodeCommune()}" tabindex="-1" role="dialog" aria-hidden="true">
 	                       <div class="modal-dialog modal-dialog-centered" role="document">
 	                           <div class="modal-content">
 	                               <div class="modal-header">
 	                                   <h5 class="modal-title">
-	                                       Edit ${ville.getNomCommune()}</h5>
+	                                       Edit ${city.getNomCommune()}</h5>
 	                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	                                       <span aria-hidden="true">&times;</span>
 	                                   </button>
@@ -146,48 +146,48 @@
 	                                   <form action="/API-Client/list?page=${page}" method="post">
 	                                       <input type="hidden" name="_method" value="put">
 	                                       <div class="form-group row">
-	                                           <label for="codeCommune-${ville.getCodeCommune()}"
+	                                           <label for="codeCommune-${city.getCodeCommune()}"
 	                                                  class="col-sm-3 col-form-label">Code
 	                                           </label>
 	                                           <div class="col-sm-9">
-	                                               <input type="text" class="form-control" name="codeCommune" id="codeCommune-${ville.getCodeCommune()}" placeholder="Code" value="${ville.getCodeCommune()}" readonly>
+	                                               <input type="text" class="form-control" name="codeCommune" id="codeCommune-${city.getCodeCommune()}" placeholder="Code" value="${city.getCodeCommune()}" readonly>
 	                                           </div>
 	                                       </div>
 	                                       <div class="form-group row">
-	                                           <label for="nomCommune-${ville.getCodeCommune()}" class="col-sm-3 col-form-label">Nom</label>
+	                                           <label for="nomCommune-${city.getCodeCommune()}" class="col-sm-3 col-form-label">Nom</label>
 	                                           <div class="col-sm-9">
-	                                               <input type="text" class="form-control" name="nomCommune" id="nomCommune-${ville.getCodeCommune()}" placeholder="Nom" value="${ville.getNomCommune()}">
+	                                               <input type="text" class="form-control" name="nomCommune" id="nomCommune-${city.getCodeCommune()}" placeholder="Nom" value="${city.getNomCommune()}">
 	                                           </div>
 	                                       </div>
 	                                       <div class="form-group row">
-	                                           <label for="codePostal-${ville.getCodeCommune()}" class="col-sm-3 col-form-label">Code Postal</label>
+	                                           <label for="codePostal-${city.getCodeCommune()}" class="col-sm-3 col-form-label">Code Postal</label>
 	                                           <div class="col-sm-9">
-	                                               <input type="text" class="form-control" name="codePostal" id="codePostal-${ville.getCodeCommune()}" placeholder="Code Postal" value="${ville.getCodePostal()}">
+	                                               <input type="text" class="form-control" name="codePostal" id="codePostal-${city.getCodeCommune()}" placeholder="Code Postal" value="${city.getCodePostal()}">
 	                                           </div>
 	                                       </div>
 	                                       <div class="form-group row">
-	                                           <label for="libelle-${ville.getCodeCommune()}" class="col-sm-3 col-form-label">Libelle</label>
+	                                           <label for="libelle-${city.getCodeCommune()}" class="col-sm-3 col-form-label">Libelle</label>
 	                                           <div class="col-sm-9">
-	                                               <input type="text" class="form-control" name="libelle" id="libelle-${ville.getCodeCommune()}" placeholder="Libelle" value="${ville.getLibelleAcheminement()}">
+	                                               <input type="text" class="form-control" name="libelle" id="libelle-${city.getCodeCommune()}" placeholder="Libelle" value="${city.getLibelleAcheminement()}">
 	                                           </div>
 	                                       </div>
 	                                       <div class="form-group row">
-	                                           <label for="ligne-${ville.getCodeCommune()}" class="col-sm-3 col-form-label">Ligne</label>
+	                                           <label for="ligne-${city.getCodeCommune()}" class="col-sm-3 col-form-label">Ligne</label>
 	                                           <div class="col-sm-9">
-	                                               <input type="text" class="form-control" name="ligne" id="ligne-${ville.getCodeCommune()}" placeholder="Ligne" value="${ville.getLigne()}">
+	                                               <input type="text" class="form-control" name="ligne" id="ligne-${city.getCodeCommune()}" placeholder="Ligne" value="${city.getLigne()}">
 	                                           </div>
 	                                       </div>
 	                                       <div class="form-group row">
-	                                           <label for="latitude-${ville.getCodeCommune()}" class="col-sm-3 col-form-label">Latitude</label>
+	                                           <label for="latitude-${city.getCodeCommune()}" class="col-sm-3 col-form-label">Latitude</label>
 	                                           <div class="col-sm-9">
-	                                               <input type="text" class="form-control" name="latitude" id="latitude-${ville.getCodeCommune()}" placeholder="Latitude" value="${ville.getLatitude()}">
+	                                               <input type="text" class="form-control" name="latitude" id="latitude-${city.getCodeCommune()}" placeholder="Latitude" value="${city.getLatitude()}">
 	                                           </div>
 	                                       </div>
 	                                       <div class="form-group row">
-	                                           <label for="longitude-${ville.getCodeCommune()}" class="col-sm-3 col-form-label">Longitude
+	                                           <label for="longitude-${city.getCodeCommune()}" class="col-sm-3 col-form-label">Longitude
 	                                           </label>
 	                                           <div class="col-sm-9">
-	                                               <input type="text" class="form-control" name="longitude" id="longitude-${ville.getCodeCommune()}" placeholder="Longitude" value="${ville.getLongitude()}">
+	                                               <input type="text" class="form-control" name="longitude" id="longitude-${city.getCodeCommune()}" placeholder="Longitude" value="${city.getLongitude()}">
 	                                           </div>
 	                                       </div>
 	                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

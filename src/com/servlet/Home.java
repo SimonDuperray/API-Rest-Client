@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import com.beans.Ville;
-import com.service.Process;
+import com.beans.City;
+import com.service.MainService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,33 +21,33 @@ public class Home extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Ville> villes = Process.getVilles();
+		List<City> cities = MainService.getCities();
 		HttpSession session = request.getSession();
-		session.setAttribute("villes", villes);
-		request.setAttribute("villes", villes);
+		session.setAttribute("cities", cities);
+		request.setAttribute("cities", cities);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		List<Ville> villes = (List<Ville>) session.getAttribute("villes");
-		if (villes == null) {
-			villes = Process.getVilles();
-			session.setAttribute("villes", villes);
+		List<City> cities = (List<City>) session.getAttribute("cities");
+		if (cities == null) {
+			cities = MainService.getCities();
+			session.setAttribute("cities", cities);
 		}
-		Ville ville1 = Process.getVille(request.getParameter("ville1"));
-		Ville ville2 = Process.getVille(request.getParameter("ville2"));
-		int distanceDirect = Process.getDistanceDirect(ville1, ville2);
-		int distanceRoad = Process.getDistanceRoad(ville1, ville2);
-		HashMap<String, String> weatherVille2 = Process.getWeather(ville2);
+		City City1 = MainService.getCity(request.getParameter("ville1"));
+		City City2 = MainService.getCity(request.getParameter("ville2"));
+		int distance = MainService.getDistance(City1, City2);
+		HashMap<String, String> weatherCity1 = MainService.getWeather(City1);
+		HashMap<String, String> weatherCity2 = MainService.getWeather(City2);
 		
-		request.setAttribute("villes", villes);
+		request.setAttribute("cities", cities);
 		request.setAttribute("displayDistance", true);
-		request.setAttribute("ville1", ville1);
-		request.setAttribute("ville2", ville2);
-		request.setAttribute("distanceDirect", distanceDirect);
-		request.setAttribute("distanceRoad", distanceRoad);
-		request.setAttribute("weatherVille2", weatherVille2);
+		request.setAttribute("ville1", City1);
+		request.setAttribute("ville2", City2);
+		request.setAttribute("distance", distance);
+		request.setAttribute("weatherCity1", weatherCity1);
+		request.setAttribute("weatherCity2", weatherCity2);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
 }
