@@ -7,6 +7,8 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="API-Client-0.0.1-SNAPSHOT.war" />
+    <root id="archive" name="API-Client-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="API-Client:war exploded" />
+    </root>
   </artifact>
 </component>
